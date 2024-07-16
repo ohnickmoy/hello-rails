@@ -14,6 +14,12 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
+  redis:
+    image: redis:7.2.5
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/var/lib/redis/data
   hello-test-app:
     build: . 
     command: ./bin/rails server
@@ -25,12 +31,14 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
     volumes:
-      - app-storage:/rails/storage
+      - app_storage:/rails/storage
     depends_on:
       - db
+      - redis
     ports:
       - "3000:3000"
 
 volumes:
   postgres_data: {}
-  app-storage: {}
+  app_storage: {}
+  redis_data: {}

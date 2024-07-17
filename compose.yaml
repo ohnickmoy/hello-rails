@@ -20,6 +20,20 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/var/lib/redis/data
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+  redis-exporter:
+    image: oliver006/redis_exporter
+    ports:
+      - "9121:9121"
+    restart: unless-stopped
+    environment:
+      REDIS_ADDR: "redis:6379"
+      REDIS_USER: null
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    links:
+      - redis
+      - prometheus
   hello-test-app:
     build: . 
     command: ./bin/rails server

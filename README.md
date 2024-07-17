@@ -1,24 +1,25 @@
-# README
+# Hello, Rails!
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a basic Ruby on Rails App to display "Hello, Rails" on your local machine
 
-Things you may want to cover:
+## Prerequisites
 
-* Ruby version
+This guides assumes you're running this on Mac OS X.
 
-* System dependencies
+At minimum, you'll need docker on your machine to build and run the containers. Mac machines use Docker Desktop. 
 
-* Configuration
+Once you have that ready, run
 
-* Database creation
+```
+docker compose build
+```
+then
+```
+docker compose up
+```
 
-* Database initialization
+The Makefile is there for your convenience to short hand some of these commands, e.g. `make build`, or `make up`
 
-* How to run the test suite
+### Alerting and Monitoring
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Given the time constraints

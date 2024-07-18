@@ -14,26 +14,37 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
+  db-exporter:
+    image: prometheuscommunity/postgres-exporter
+    ports:
+      - 9187:9187
+    environment:
+      # never ever do this in a non local environment
+      DATA_SOURCE_NAME: "postgresql://hello_user:supersecretpassword123@db:5432/hello_test_db_production?sslmode=disable"
+    links:
+      - db
+      - prometheus
+
   redis:
     image: redis:7.2.5
+    command: "redis-server --requirepass password"
     ports:
       - "6379:6379"
     volumes:
       - redis_data:/var/lib/redis/data
-    environment:
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
   redis-exporter:
     image: oliver006/redis_exporter
+    command:
+      - '--redis.password=password'
     ports:
       - "9121:9121"
     restart: unless-stopped
     environment:
-      REDIS_ADDR: "redis:6379"
-      REDIS_USER: null
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      - REDIS_ADDR=redis:6379
     links:
       - redis
       - prometheus
+
   hello-test-app:
     build: . 
     command: ./bin/rails server
@@ -65,6 +76,9 @@ services:
     image: grafana/grafana:9.5.20
     ports:
       - "3001:3000"
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
 
 volumes:
   postgres_data: {}

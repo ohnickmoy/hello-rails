@@ -1,6 +1,6 @@
 # Hello, Rails!
 
-This is a basic Ruby on Rails App to display "Hello, Rails" on your local machine, along with a redis instance, a postgresql instance, and some basic monitoring via Prometheus and Grafana
+This is a basic Ruby on Rails App to display "Hello, Rails" on your local machine, along with a redis instance, a postgresql instance, and some basic monitoring via Prometheus and Grafana. It's meant for educational purposes and not for a production environment
 
 ## Prerequisites
 

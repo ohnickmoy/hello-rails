@@ -19,6 +19,7 @@ services:
     ports:
       - 9187:9187
     environment:
+      # never ever do this in a non local environment
       DATA_SOURCE_NAME: "postgresql://hello_user:supersecretpassword123@db:5432/hello_test_db_production?sslmode=disable"
     links:
       - db
@@ -43,6 +44,7 @@ services:
     links:
       - redis
       - prometheus
+
   hello-test-app:
     build: . 
     command: ./bin/rails server
@@ -74,6 +76,9 @@ services:
     image: grafana/grafana:9.5.20
     ports:
       - "3001:3000"
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
 
 volumes:
   postgres_data: {}

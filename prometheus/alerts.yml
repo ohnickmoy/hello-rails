@@ -1,0 +1,39 @@
+groups:
+  - name: redis-alerts
+    rules:
+      - alert: RedisMemoryUsageHigh
+        expr: redis_memory_used_bytes > 2000000000
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Redis memory usage is high"
+          description: "Redis memory usage is above 2GB for more than 5 minutes."
+      - alert: RedisConnectedClientsWarning
+        expr: redis_connected_clients > 50
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High number of connected clients on Redis"
+          description: "Number of connected clients is above 50 for more than 5 minutes."
+  - name: rails-alerts
+    rules:
+      - alert: RailsAppHigh404
+        expr: http_server_requests_total{code="404"} > 5000
+        for: 3m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Rails app returning high number of 404s"
+          description: "Rails 404 response count is above 5000 for more than 3 minutes."
+  - name: db-alerts
+    rules:
+      - alert: DatabaseIsDown
+        expr: pg_up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Database is Down"
+          description: "Database is down or not responsive for the last minute"

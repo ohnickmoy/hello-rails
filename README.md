@@ -20,13 +20,15 @@ then
 docker compose up
 ```
 
+Initial build runs take a while, so grab a cup of coffee while you're waiting. This also includes an initial `up` run since you'll need to pull some extra images. 
+
 The Makefile is there for your convenience to short hand some of these commands, e.g. `make build`, or `make up`
 
 To access the rails app, go to `localhost:3000`
 
 To access prometheus, go to `localhost:9090`
 
-To access the Grafana service, go to `localhost:3001`, and type in for both the username and password and skip the creation of a new password 
+To access the Grafana service, go to `localhost:3001`, and type in `admin` for both the username and password and skip the creation of a new password 
 
 ## Dev Flow
 
@@ -35,6 +37,8 @@ If you do fork this repo for your own purposes to learn, be sure to run `bundle 
 ## Alerting and Monitoring
 
 Each service has their own dashboard. Due to some time constraints, I've decided to settle down on some simple alerts but would to explore more in the future. 
+
+Grafana Dashboards can be accessed from the side bar. Alerts are through Prometheus
 
 ### Rails 
 

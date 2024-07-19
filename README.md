@@ -36,13 +36,13 @@ If you do fork this repo for your own purposes to learn, be sure to run `bundle 
 
 ## Alerting and Monitoring
 
-Each service has their own dashboard. Due to some time constraints, I've decided to settle down on some simple alerts but would to explore more in the future. 
+Each service has its own dashboard. Due to some time constraints, I've decided to settle down on some simple alerts but would like to explore more in the future. 
 
-Grafana Dashboards can be accessed from the side bar. Alerts are through Prometheus
+Grafana Dashboards can be accessed from the sidebar within the Grafana service. Alerts are through Prometheus
 
 ### Rails 
 
-Rails metrics are fairly simple as this point and they're provided by the `prometheus-client` gem. Out of the box are the following metrics:
+Rails metrics are fairly simple at this point and they're provided by the `prometheus-client` gem. Out of the box are the following metrics:
 
 - `http_server_requests_total`
 - `http_server_request_duration_seconds_bucket`
@@ -51,19 +51,19 @@ Rails metrics are fairly simple as this point and they're provided by the `prome
 
 Metrics displayed on the dashboard include HTTP server requests, average request duration, and HTTP request rate.
 
-Alerting covers a high 404 count over 3 minutes. Other alerts  I would've liked to cover would be High Memory / CPU usage, or latency. 
+Alerting covers a high 404 count over 3 minutes. Other alerts I would've liked to cover would be High Memory / CPU usage, or latency. 
 
 ### Postgres
 
 Postgres dashboard was adapted from [this source](https://grafana.com/grafana/dashboards/9628-postgresql-database/)
 
-Alerting covers if there's a lost connection or if the database is not responsive over a minute. Other alerts to explore include query speed, or high disk usage
+Alerting is set to go if there's a lost connection or if the database is not responsive over a minute. Other alerts to explore include query speed, or high disk usage
 
 ### Redis
 
 Redis dashboard was adapted from [this source](https://grafana.com/grafana/dashboards/11692-redis-dashboard-for-prometheus-redis-exporter-1-x/)
 
-Alerts cover high memory usage over 2 Gigs over 5 minutes and a high number of connected clients at once. Similar alerts to explore would probably include high CPU usage, or if connection to the redis server is lost. 
+Alerts cover high memory usage over 2 Gigs over 5 minutes and a high number of connected clients at once. Similar alerts to explore would probably include high CPU usage, or if the connection to the redis server is lost. 
 
 ## Troubleshooting
 
